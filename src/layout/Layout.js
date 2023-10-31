@@ -4,6 +4,7 @@ import NotFound from "./NotFound";
 import Menu from "./Menu";
 import { Route, Switch } from "react-router-dom";
 import Home from "../home/Home";
+import ObservationsCreate from "../Observations/ObservationsCreate";
 
 function Layout() {
   return (
@@ -12,6 +13,12 @@ function Layout() {
       <Menu />
       <div className="container">
         <Switch>
+          <Route path="/observations/new">
+            <ObservationsCreate />
+          </Route>
+          <Route path="/observations/:observation_id/edit">
+            <ObservationsCreate />
+          </Route>
           <Route exact={true} path="/">
             <Home />
           </Route>

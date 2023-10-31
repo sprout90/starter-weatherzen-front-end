@@ -44,3 +44,49 @@ async function fetchJson(url, options) {
     }
   }
 }
+
+
+export async function createObservation(observation, signal){
+  
+  const url = `${API_BASE_URL}/observations`;
+  const options = {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ data: observation }),
+    signal,
+  };
+
+  return await fetchJson(url, options);
+}
+
+export async function updateObservation(observation_id, observation, signal){
+  
+  const url = `${API_BASE_URL}/observations/${observation_id}`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ data: observation }),
+    signal,
+  };
+
+  return await fetchJson(url, options);
+}
+
+
+export async function listObservations(signal){
+  const url = `${API_BASE_URL}/observations`;
+    const options = {
+      headers,
+      signal,
+    };
+    return await fetchJson(url, options);
+}
+
+export async function getObservation(observation_id, signal){
+  const url = `${API_BASE_URL}/observations/${observation_id}`;
+    const options = {
+      headers,
+      signal,
+    };
+    return await fetchJson(url, options);
+}
