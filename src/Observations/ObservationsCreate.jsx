@@ -9,15 +9,6 @@ function ObservationCreate() {
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState( (observation_id === undefined) ? "create" : "edit");
 
-  console.log("edit mode", editMode)
-
-  /*const initFormState = {
-    latitude: "",
-    longitude: "",
-    sky_condition: "",
-  };
-  */
-
   const [observation, setObservation] = useState({});
 
   useEffect(() => {
@@ -50,18 +41,15 @@ function ObservationCreate() {
     if (editMode === "create"){
       createObservation(observation, abortController.signal)
       .then(() => {
-        console.log("create", observation)
         history.push("/");
-
       })
       .catch(setError);
 
       return () => abortController.abort();
     } else {
-      
+
       updateObservation(observation_id, observation, abortController.signal)
       .then(() => {
-        console.log("update", observation)
         history.push("/");
 
       })
@@ -119,6 +107,41 @@ function ObservationCreate() {
               required={true}
             />
             <small className="form-text text-muted">Enter a value between -180 and 180.</small>
+          </div>
+        </div>
+        <div className="row mb-3">
+          <div className="col-6 form-group">
+            <label className="form-label" htmlFor="air_temperature">
+              Air Temperature
+            </label>
+            <input
+              className="form-control"
+              id="air_temperature"
+              name="air_temperature"
+              type="number"
+              max="120"
+              min="-50"
+              value={observation.air_temperature}
+              onChange={changeHandler}
+              required={true}
+            />
+            <small className="form-text text-muted">Enter a value between -50 and 120.</small>
+          </div>
+          <div className="col-6">
+            <label className="form-label" htmlFor="air_temperature_unit">
+              Air Temperature Unit
+            </label>
+            <input
+              className="form-control"
+              id="air_temperature_unit"
+              name="air_temperature_unit"
+              type="text"
+              pattern="[CF]"
+              value={observation.air_temperature_unit}
+              onChange={changeHandler}
+              required={true}
+            />
+            <small className="form-text text-muted">Enter C for Celcius, or F for Fahrenheit</small>
           </div>
         </div>
         <div className="mb-3">
